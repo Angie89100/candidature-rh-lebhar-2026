@@ -1,354 +1,299 @@
-from pathlib import Path
-
-html = """<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio RH & Transformation des processus — Angélique Boulle</title>
-  <style>
-    :root{
-      --navy:#0B3157;
-      --blue:#2D6E9F;
-      --teal:#0E7782;
-      --pale:#F1F7F8;
-      --text:#252A30;
-      --muted:#66717C;
-      --line:#B8D4D8;
-      --white:#ffffff;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      color:var(--text);
-      background:#eef2f5;
-      line-height:1.55;
-    }
-    .page{
-      width:min(1180px, calc(100% - 28px));
-      margin:28px auto;
-      background:var(--white);
-      box-shadow:0 12px 36px rgba(11,49,87,.12);
-      overflow:hidden;
-    }
-    header{
-      padding:36px 44px 30px;
-      border-bottom:4px solid var(--teal);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,1) 0 72%, rgba(14,119,130,.08) 72% 100%);
-    }
-    .top{
-      display:flex;
-      justify-content:space-between;
-      gap:36px;
-      align-items:flex-start;
-    }
-    h1{
-      margin:0;
-      font-size:40px;
-      line-height:1.05;
-      color:var(--navy);
-      letter-spacing:.3px;
-    }
-    .subtitle{
-      margin-top:9px;
-      font-size:20px;
-      font-weight:700;
-      color:var(--blue);
-    }
-    .contact{
-      text-align:right;
-      font-size:14px;
-      color:var(--muted);
-      min-width:260px;
-    }
-    .contact strong{color:var(--navy)}
-    .tagline{
-      margin-top:22px;
-      color:var(--text);
-      font-size:15px;
-    }
-    nav{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      padding:16px 44px;
-      background:var(--navy);
-      position:sticky;
-      top:0;
-      z-index:3;
-    }
-    nav a{
-      color:white;
-      text-decoration:none;
-      border:1px solid rgba(255,255,255,.35);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:13px;
-    }
-    nav a:hover{background:white;color:var(--navy)}
-    main{padding:38px 44px 46px}
-    section{margin-bottom:42px}
-    h2{
-      margin:0 0 18px;
-      font-size:25px;
-      color:var(--navy);
-      border-bottom:2px solid var(--line);
-      padding-bottom:8px;
-    }
-    h3{
-      margin:0 0 10px;
-      color:var(--teal);
-      font-size:18px;
-    }
-    p{margin:0 0 12px}
-    .intro{
-      font-size:17px;
-      max-width:920px;
-    }
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-top:22px;
-    }
-    .card{
-      background:var(--pale);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:22px;
-    }
-    .card .num{
-      font-size:13px;
-      color:var(--blue);
-      font-weight:700;
-      margin-bottom:8px;
-    }
-    .card p{
-      font-size:14px;
-      margin-bottom:8px;
-    }
-    .card strong{color:var(--navy)}
-    .positioning{
-      margin-top:22px;
-      border-left:5px solid var(--teal);
-      background:#f8fbfc;
-      padding:18px 20px;
-    }
-    .method{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:12px;
-    }
-    .step{
-      border-top:4px solid var(--teal);
-      padding:14px 12px;
-      background:#fbfcfd;
-    }
-    .step .n{
-      color:var(--blue);
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:5px;
-    }
-    .step h3{font-size:16px}
-    .step p{font-size:13px}
-    .matrix{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:18px;
-    }
-    .matrix th,.matrix td{
-      border:1px solid var(--line);
-      padding:13px 14px;
-      vertical-align:top;
-      text-align:left;
-      font-size:14px;
-    }
-    .matrix th{
-      width:190px;
-      background:var(--pale);
-      color:var(--navy);
-    }
-    .goal{
-      background:var(--navy);
-      color:white;
-      padding:28px;
-      border-radius:14px;
-      font-size:18px;
-    }
-    .goal strong{color:#cfeff1}
-    footer{
-      background:var(--navy);
-      color:white;
-      padding:20px 44px;
-      display:flex;
-      justify-content:space-between;
-      gap:20px;
-      font-size:13px;
-    }
-    @media(max-width:900px){
-      .top{display:block}
-      .contact{text-align:left;margin-top:20px}
-      .cards{grid-template-columns:1fr}
-      .method{grid-template-columns:1fr}
-      h1{font-size:31px}
-      header,main{padding-left:24px;padding-right:24px}
-      nav{padding-left:24px;padding-right:24px}
-      footer{padding-left:24px;padding-right:24px;display:block}
-      .matrix th{width:135px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio RH & Transformation des processus | Angélique Boulle</title>
+<style>
+:root{
+  --navy:#0b3157;
+  --blue:#2d6e9f;
+  --teal:#0e7782;
+  --pale:#f1f7f8;
+  --text:#252a30;
+  --muted:#66717c;
+  --line:#b8d4d8;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eef2f5;
+  color:var(--text);
+  line-height:1.55;
+}
+.site{
+  width:min(1180px,calc(100% - 32px));
+  margin:28px auto;
+  background:#fff;
+  box-shadow:0 12px 35px rgba(11,49,87,.13);
+}
+header{
+  padding:36px 44px 30px;
+  border-bottom:4px solid var(--teal);
+  background:linear-gradient(135deg,#fff 0 72%,#edf6f7 72% 100%);
+}
+.header-grid{
+  display:grid;
+  grid-template-columns:1fr 310px;
+  gap:35px;
+  align-items:start;
+}
+h1{
+  margin:0;
+  color:var(--navy);
+  font-size:40px;
+  line-height:1.05;
+  letter-spacing:.3px;
+}
+.subtitle{
+  margin-top:9px;
+  color:var(--blue);
+  font-size:20px;
+  font-weight:700;
+}
+.candidature{
+  margin-top:22px;
+  font-size:15px;
+}
+.contact{
+  border-left:2px solid var(--blue);
+  padding-left:24px;
+  font-size:14px;
+  color:var(--muted);
+}
+.contact strong{color:var(--navy)}
+nav{
+  padding:15px 44px;
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  background:var(--navy);
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+  padding:7px 12px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:20px;
+}
+nav a:hover{background:#fff;color:var(--navy)}
+main{padding:38px 44px 48px}
+section{margin-bottom:42px}
+h2{
+  color:var(--navy);
+  font-size:25px;
+  margin:0 0 18px;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--line);
+}
+h3{color:var(--teal);font-size:18px;margin:0 0 9px}
+.intro{font-size:17px;max-width:950px}
+.note{
+  margin-top:20px;
+  padding:18px 20px;
+  border-left:5px solid var(--teal);
+  background:#f7fafb;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.card{
+  background:var(--pale);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:21px;
+}
+.card .eyebrow{
+  color:var(--blue);
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+.card p{font-size:14px;margin:8px 0}
+.card strong{color:var(--navy)}
+.method{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:11px;
+}
+.step{
+  border-top:4px solid var(--teal);
+  background:#fbfcfd;
+  padding:14px 12px;
+}
+.step span{
+  color:var(--blue);
+  font-size:11px;
+  font-weight:700;
+}
+.step h3{font-size:16px;margin-top:5px}
+.step p{font-size:13px;margin-bottom:0}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:13px 14px;
+  text-align:left;
+  vertical-align:top;
+  font-size:14px;
+}
+th{
+  width:190px;
+  background:var(--pale);
+  color:var(--navy);
+}
+.goal{
+  background:var(--navy);
+  color:#fff;
+  border-radius:12px;
+  padding:25px 27px;
+  font-size:17px;
+}
+footer{
+  background:var(--navy);
+  color:#fff;
+  padding:18px 44px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  font-size:13px;
+}
+@media(max-width:850px){
+  .site{width:100%;margin:0;box-shadow:none}
+  header,main{padding-left:24px;padding-right:24px}
+  nav{padding-left:24px;padding-right:24px}
+  .header-grid{grid-template-columns:1fr}
+  .contact{border-left:0;padding-left:0}
+  h1{font-size:31px}
+  .cards,.method{grid-template-columns:1fr}
+  footer{display:block;padding-left:24px;padding-right:24px}
+  footer div+div{margin-top:5px}
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <div class="top">
-        <div>
-          <h1>ANGÉLIQUE BOULLE</h1>
-          <div class="subtitle">Portfolio — RH & transformation des processus</div>
-          <div class="tagline">Candidature Gestionnaire Paie & Missions RH — LEBHAR, Gron</div>
-        </div>
-        <div class="contact">
-          <strong>Paron (89100)</strong><br>
-          Mobilité : Gron, Sens et environs<br>
-          06 50 97 31 05<br>
-          angeliqueboulle072@gmail.com
-        </div>
-      </div>
-    </header>
+<div class="site">
 
-    <nav>
-      <a href="#positionnement">Positionnement</a>
-      <a href="#realisations">Réalisations</a>
-      <a href="#methode">Méthode</a>
-      <a href="#apports">Apports RH</a>
-      <a href="#objectif">Objectif</a>
-    </nav>
-
-    <main>
-      <section id="positionnement">
-        <h2>Une approche simple : comprendre, structurer, fiabiliser, améliorer</h2>
-        <p class="intro">
-          Ce portfolio complète mon CV. Il présente quelques exemples de ma manière de travailler :
-          partir d’un besoin concret, formaliser un processus, créer un outil simple et exploitable,
-          puis accompagner son utilisation.
-        </p>
-        <div class="positioning">
-          Il ne vise pas à me présenter comme spécialiste technique de la paie. Ma formation RRH
-          m’a permis d’approfondir les principes de la paie, de la DSN et des déclarations sociales,
-          et mes expériences m’ont amenée à travailler sur des éléments variables et des activités RH.
-          Mon objectif est aujourd’hui de renforcer cette pratique dans un environnement d’entreprise.
-        </div>
-      </section>
-
-      <section id="realisations">
-        <h2>Quelques réalisations transférables</h2>
-        <div class="cards">
-          <article class="card">
-            <div class="num">01 — DIGITALISER UNE DÉMARCHE</div>
-            <h3>Accompagnement des familles</h3>
-            <p><strong>Contexte :</strong> accompagnement des familles au service Enfance & Éducation de la Ville de Sens.</p>
-            <p><strong>Réalisation :</strong> conception d’un tutoriel et de supports facilitant l’utilisation du Portail Famille et les démarches de réservation.</p>
-            <p><strong>Apport transférable :</strong> pédagogie, simplification d’une procédure, accompagnement au changement et fiabilité de l’information.</p>
-          </article>
-
-          <article class="card">
-            <div class="num">02 — STRUCTURER LE SUIVI</div>
-            <h3>Tableaux de bord & reporting</h3>
-            <p><strong>Contexte :</strong> besoin de disposer d’une vision plus claire de l’activité d’accueil et de rendez-vous.</p>
-            <p><strong>Réalisation :</strong> création d’outils de suivi, tableaux de bord, statistiques et reporting.</p>
-            <p><strong>Apport transférable :</strong> organisation des données, indicateurs utiles, contrôle de cohérence et aide au pilotage.</p>
-          </article>
-
-          <article class="card">
-            <div class="num">03 — FIABILISER LES PROCESSUS</div>
-            <h3>Procédures & traçabilité</h3>
-            <p><strong>Contexte :</strong> activités administratives soumises à des procédures, délais et circuits de validation.</p>
-            <p><strong>Réalisation :</strong> formalisation de processus, suivi documentaire et sécurisation de l’information.</p>
-            <p><strong>Apport transférable :</strong> confidentialité, respect des échéances, traçabilité et amélioration continue.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="methode">
-        <h2>Ma méthode de travail</h2>
-        <div class="method">
-          <div class="step">
-            <div class="n">ÉTAPE 1</div>
-            <h3>Comprendre</h3>
-            <p>Identifier l’objectif, les utilisateurs, les contraintes et les points de blocage.</p>
-          </div>
-          <div class="step">
-            <div class="n">ÉTAPE 2</div>
-            <h3>Structurer</h3>
-            <p>Formaliser les étapes, les responsabilités, les données nécessaires et les échéances.</p>
-          </div>
-          <div class="step">
-            <div class="n">ÉTAPE 3</div>
-            <h3>Concevoir</h3>
-            <p>Créer un outil simple : tableau de suivi, indicateur, support, procédure ou prototype.</p>
-          </div>
-          <div class="step">
-            <div class="n">ÉTAPE 4</div>
-            <h3>Vérifier</h3>
-            <p>Contrôler la cohérence des données, la traçabilité et l’utilité réelle de l’outil.</p>
-          </div>
-          <div class="step">
-            <div class="n">ÉTAPE 5</div>
-            <h3>Accompagner</h3>
-            <p>Expliquer le fonctionnement, recueillir les retours et ajuster si nécessaire.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="apports">
-        <h2>Ce que je peux apporter à une équipe RH</h2>
-        <table class="matrix">
-          <tr>
-            <th>Administration RH</th>
-            <td>Rigueur documentaire, suivi des dossiers, confidentialité, échéances et traçabilité.</td>
-          </tr>
-          <tr>
-            <th>Paie</th>
-            <td>Connaissance des principes de paie/DSN acquise en formation RRH, expérience sur des éléments variables et volonté de consolider la pratique opérationnelle.</td>
-          </tr>
-          <tr>
-            <th>Reporting</th>
-            <td>Création de tableaux de bord, statistiques et outils de suivi pour rendre l’information exploitable.</td>
-          </tr>
-          <tr>
-            <th>Transformation</th>
-            <td>Analyse d’un besoin, simplification des processus, conception de supports et prototypes, accompagnement des utilisateurs.</td>
-          </tr>
-          <tr>
-            <th>Posture</th>
-            <td>Discrétion, fiabilité, capacité d’adaptation et approche progressive : apprendre, vérifier, puis gagner en autonomie.</td>
-          </tr>
-        </table>
-      </section>
-
-      <section id="objectif">
-        <h2>Objectif professionnel</h2>
-        <div class="goal">
-          Rejoindre une entreprise proche de mon lieu de résidence où je puisse mobiliser mon expérience
-          administrative et RH, consolider mes compétences opérationnelles en paie et contribuer à des projets
-          d’amélioration ou de digitalisation des processus.
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div>Angélique Boulle — Paron</div>
-      <div>Candidature Gestionnaire Paie & Missions RH — LEBHAR Gron</div>
-    </footer>
+<header>
+  <div class="header-grid">
+    <div>
+      <h1>ANGÉLIQUE BOULLE</h1>
+      <div class="subtitle">Portfolio — RH & transformation des processus</div>
+      <div class="candidature">Candidature Gestionnaire Paie & Missions RH — LEBHAR, Gron</div>
+    </div>
+    <div class="contact">
+      <strong>Paron (89100)</strong><br>
+      Mobilité : Gron, Sens et environs<br>
+      06 50 97 31 05<br>
+      angeliqueboulle072@gmail.com
+    </div>
   </div>
+</header>
+
+<nav>
+  <a href="#positionnement">Positionnement</a>
+  <a href="#realisations">Réalisations</a>
+  <a href="#methode">Méthode</a>
+  <a href="#apports">Apports RH</a>
+  <a href="#objectif">Objectif</a>
+</nav>
+
+<main>
+
+<section id="positionnement">
+  <h2>Une approche simple : comprendre, structurer, fiabiliser, améliorer</h2>
+  <p class="intro">
+    Ce portfolio complète mon CV. Il présente quelques exemples de ma manière de travailler :
+    partir d’un besoin concret, formaliser un processus, créer un outil simple et exploitable,
+    puis accompagner son utilisation.
+  </p>
+  <div class="note">
+    Ma formation de Responsable des Ressources Humaines m’a permis d’acquérir et d’approfondir
+    les fondamentaux de la paie, de la DSN et des déclarations sociales. Mes expériences m’ont
+    également amenée à travailler sur des éléments variables et différentes activités RH.
+    Je souhaite aujourd’hui mobiliser ces acquis et renforcer ma pratique opérationnelle dans
+    un environnement d’entreprise.
+  </div>
+</section>
+
+<section id="realisations">
+  <h2>Quelques réalisations transférables</h2>
+  <div class="cards">
+
+    <article class="card">
+      <div class="eyebrow">01 — DIGITALISER UNE DÉMARCHE</div>
+      <h3>Accompagnement des familles</h3>
+      <p><strong>Contexte :</strong> accompagnement des familles au sein du service Enfance & Éducation de la Ville de Sens.</p>
+      <p><strong>Réalisation :</strong> conception d’un tutoriel et de supports facilitant l’utilisation du Portail Famille et les démarches de réservation.</p>
+      <p><strong>Apport transférable :</strong> pédagogie, simplification d’une procédure, accompagnement au changement et fiabilité de l’information.</p>
+    </article>
+
+    <article class="card">
+      <div class="eyebrow">02 — STRUCTURER LE SUIVI</div>
+      <h3>Tableaux de bord & reporting</h3>
+      <p><strong>Contexte :</strong> besoin de disposer d’une vision plus claire de l’activité d’accueil et de rendez-vous.</p>
+      <p><strong>Réalisation :</strong> création d’outils de suivi, tableaux de bord, statistiques et reporting.</p>
+      <p><strong>Apport transférable :</strong> organisation des données, indicateurs utiles, contrôle de cohérence et aide au pilotage.</p>
+    </article>
+
+    <article class="card">
+      <div class="eyebrow">03 — FIABILISER LES PROCESSUS</div>
+      <h3>Procédures & traçabilité</h3>
+      <p><strong>Contexte :</strong> activités administratives soumises à des procédures, délais et circuits de validation.</p>
+      <p><strong>Réalisation :</strong> formalisation de processus, suivi documentaire et sécurisation de l’information.</p>
+      <p><strong>Apport transférable :</strong> confidentialité, respect des échéances, traçabilité et amélioration continue.</p>
+    </article>
+
+  </div>
+</section>
+
+<section id="methode">
+  <h2>Ma méthode de travail</h2>
+  <div class="method">
+    <div class="step"><span>ÉTAPE 1</span><h3>Comprendre</h3><p>Identifier l’objectif, les utilisateurs, les contraintes et les points de blocage.</p></div>
+    <div class="step"><span>ÉTAPE 2</span><h3>Structurer</h3><p>Formaliser les étapes, les responsabilités, les données nécessaires et les échéances.</p></div>
+    <div class="step"><span>ÉTAPE 3</span><h3>Concevoir</h3><p>Créer un outil simple : tableau de suivi, indicateur, support, procédure ou prototype.</p></div>
+    <div class="step"><span>ÉTAPE 4</span><h3>Vérifier</h3><p>Contrôler la cohérence des données, la traçabilité et l’utilité réelle de l’outil.</p></div>
+    <div class="step"><span>ÉTAPE 5</span><h3>Accompagner</h3><p>Expliquer le fonctionnement, recueillir les retours et ajuster si nécessaire.</p></div>
+  </div>
+</section>
+
+<section id="apports">
+  <h2>Ce que je peux apporter à une équipe RH</h2>
+  <table>
+    <tr><th>Administration RH</th><td>Rigueur documentaire, suivi des dossiers, confidentialité, échéances et traçabilité.</td></tr>
+    <tr><th>Paie</th><td>Fondamentaux de la paie et de la DSN acquis en formation RRH, pratique d’éléments variables et volonté de développer progressivement l’autonomie opérationnelle.</td></tr>
+    <tr><th>Reporting</th><td>Création de tableaux de bord, statistiques et outils de suivi pour rendre l’information exploitable.</td></tr>
+    <tr><th>Transformation</th><td>Analyse d’un besoin, simplification des processus, conception de supports et prototypes, accompagnement des utilisateurs.</td></tr>
+    <tr><th>Posture</th><td>Discrétion, fiabilité, capacité d’adaptation et démarche progressive : comprendre, vérifier, appliquer puis gagner en autonomie.</td></tr>
+  </table>
+</section>
+
+<section id="objectif">
+  <h2>Objectif professionnel</h2>
+  <div class="goal">
+    Rejoindre une entreprise proche de mon lieu de résidence où je puisse mobiliser mon expérience
+    administrative et RH, développer ma pratique opérationnelle en paie et contribuer à des projets
+    d’amélioration ou de digitalisation des processus.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>Angélique Boulle — Paron</div>
+  <div>Candidature Gestionnaire Paie & Missions RH — LEBHAR Gron</div>
+</footer>
+
+</div>
 </body>
 </html>
-"""
-
-path = Path("/mnt/data/Portfolio_Angelique_Boulle_LEBHAR.html")
-path.write_text(html, encoding="utf-8")
-print(path)
