@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio métier — Angélique Boulle | LEBHAR</title>
+<meta name="description" content="Portfolio métier interactif : Paie, DSN, RH, SIRH, veille et cadre juridique pour une candidature LEBHAR.">
+<style>
+:root{
+  --navy:#343432;      /* anthracite LEBHAR */
+  --navy2:#4a4945;     /* gris chaud */
+  --blue:#a88958;      /* taupe / brun du logo */
+  --teal:#8db63f;      /* vert LEBHAR */
+  --teal2:#a8c85f;     /* vert clair */
+  --sand:#d8c5a6;      /* beige du logo */
+  --ink:#353431;
+  --muted:#746f67;
+  --bg:#f1eee8;
+  --surface:#ffffff;
+  --soft:#f7f3ec;
+  --line:#ded3c1;
+  --ok:#789b35;
+  --warn:#9a7444;
+  --shadow:0 20px 60px rgba(52,52,50,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(141,182,63,.14),transparent 28%),
+    radial-gradient(circle at 92% 20%,rgba(168,137,88,.13),transparent 30%),
+    var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+}
+button,a{font:inherit}
+.app{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:270px minmax(0,1fr);
+}
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  padding:24px 18px;
+  background:linear-gradient(180deg,#2f2f2d,#46443f);
+  color:#fff;
+  overflow:auto;
+  box-shadow:12px 0 40px rgba(52,52,50,.14);
+}
+.brand{
+  padding:10px 10px 22px;
+  border-bottom:1px solid rgba(255,255,255,.15);
+}
+.brand .small{
+  font-size:11px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:#d9c9ac;
+  font-weight:800;
+}
+.brand h1{
+  margin:7px 0 4px;
+  font-size:22px;
+  line-height:1.05;
+}
+.brand p{
+  margin:0;
+  font-size:12px;
+  color:#eee7db;
+  line-height:1.45;
+}
+.menu{
+  display:grid;
+  gap:8px;
+  margin-top:20px;
+}
+.menu button{
+  width:100%;
+  border:0;
+  cursor:pointer;
+  text-align:left;
+  color:#f7f3ec;
+  background:transparent;
+  padding:11px 12px;
+  border-radius:12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  transition:.2s ease;
+}
+.menu button:hover,
+.menu button.active{
+  background:rgba(141,182,63,.20);
+  box-shadow:inset 3px 0 0 #8db63f;
+  transform:translateX(3px);
+}
+.ico{
+  width:28px;height:28px;
+  border-radius:9px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.10);
+  flex:0 0 auto;
+  font-size:14px;
+}
+.sidebar-foot{
+  margin-top:24px;
+  padding:14px 10px 0;
+  border-top:1px solid rgba(255,255,255,.15);
+  color:#ded3c1;
+  font-size:11px;
+  line-height:1.45;
+}
+.main{
+  min-width:0;
+  padding:26px;
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:center;
+  margin-bottom:18px;
+}
+.breadcrumb{
+  color:var(--muted);
+  font-size:13px;
+}
+.contact{
+  font-size:12px;
+  color:var(--muted);
+  text-align:right;
+}
+.panel{
+  display:none;
+  animation:panelIn .42s ease both;
+}
+.panel.active{display:block}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(12px) scale(.995)}
+  to{opacity:1;transform:none}
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:300px;
+  padding:38px;
+  border-radius:26px;
+  background:linear-gradient(135deg,#fff,#f8f4ed);
+  border:1px solid rgba(168,137,88,.20);
+  box-shadow:var(--shadow);
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  width:360px;height:360px;
+  right:-110px;top:-150px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(141,182,63,.24),transparent 68%);
+  animation:orb 8s ease-in-out infinite;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;
+  left:45%;bottom:-155px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(168,137,88,.20),transparent 70%);
+  animation:orb2 10s ease-in-out infinite;
+}
+@keyframes orb{50%{transform:translate(-14px,18px) scale(1.04)}}
+@keyframes orb2{50%{transform:translate(12px,-10px) scale(.95)}}
+.hero > *{position:relative;z-index:1}
+.kicker{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eef5df;
+  color:var(--teal);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.hero h2{
+  margin:16px 0 10px;
+  color:var(--navy);
+  font-size:clamp(34px,5vw,58px);
+  line-height:.98;
+  letter-spacing:-1.4px;
+}
+.hero .sub{
+  color:var(--blue);
+  font-weight:700;
+  font-size:20px;
+}
+.hero p{
+  max-width:760px;
+  color:#40515e;
+  line-height:1.6;
+}
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:20px;
+}
+.badge{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.8);
+  color:var(--navy);
+  font-size:12px;
+  font-weight:800;
+}
+.dashboard{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:16px;
+}
+.tile{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 10px 28px rgba(52,52,50,.06);
+  cursor:pointer;
+  transition:.25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.tile:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 38px rgba(52,52,50,.12);
+}
+.tile:before{
+  content:"";
+  position:absolute;
+  width:120px;height:120px;
+  border-radius:50%;
+  right:-55px;top:-55px;
+  background:radial-gradient(circle,rgba(141,182,63,.14),transparent 70%);
+}
+.tile h3{margin:4px 0 6px;color:var(--navy)}
+.tile p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.tile .num{color:var(--teal);font-size:11px;font-weight:900;letter-spacing:.8px}
+.span4{grid-column:span 4}
+.span5{grid-column:span 5}
+.span6{grid-column:span 6}
+.span7{grid-column:span 7}
+.span8{grid-column:span 8}
+.span12{grid-column:span 12}
+
+.module{
+  background:#fff;
+  border:1px solid rgba(168,137,88,.16);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.module-head{
+  padding:28px 30px 20px;
+  background:linear-gradient(135deg,#fff,#faf6ef);
+  border-bottom:1px solid var(--line);
+}
+.module-head .eyebrow{
+  color:var(--teal);
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:1px;
+}
+.module-head h2{
+  margin:6px 0 8px;
+  font-size:31px;
+  color:var(--navy);
+}
+.module-head p{
+  margin:0;
+  color:var(--muted);
+  max-width:880px;
+}
+.module-body{padding:26px 30px 32px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:18px;
+  padding:17px;
+}
+.card.soft{background:var(--soft)}
+.card.ok{background:#f1f8f5;border-color:#c9dfd6}
+.card.warn{background:#fff9ee;border-color:#ead7b0}
+.card h3{margin:0 0 8px;color:var(--teal);font-size:17px}
+.card h4{margin:0 0 8px;color:var(--navy);font-size:15px}
+.card p{margin:0;color:#465662;font-size:13.5px;line-height:1.55}
+.metric{font-size:33px;font-weight:900;color:var(--navy);line-height:1}
+.note{
+  margin-top:16px;
+  border-left:5px solid var(--teal);
+  border-radius:14px;
+  background:#faf7f0;
+  padding:15px 17px;
+}
+.callout{
+  margin-top:16px;
+  border-radius:16px;
+  padding:18px;
+  color:#fff;
+  background:linear-gradient(135deg,#363532,#575145);
+}
+.steps{
+  counter-reset:step;
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+.step{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:11px;
+  align-items:start;
+}
+.step:before{
+  counter-increment:step;
+  content:counter(step);
+  width:30px;height:30px;
+  border-radius:10px;
+  display:grid;place-items:center;
+  color:#fff;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--navy),var(--teal));
+}
+.step strong{color:var(--navy)}
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+}
+th,td{
+  padding:10px 11px;
+  text-align:left;
+  vertical-align:top;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+}
+th{background:#f3eddf;color:var(--navy)}
+tr:last-child td,tr:last-child th{border-bottom:0}
+th:last-child,td:last-child{border-right:0}
+td.num{text-align:right;white-space:nowrap}
+.flow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+  align-items:stretch;
+}
+.flow-step{
+  flex:1 1 160px;
+  min-width:145px;
+  padding:14px;
+  border-radius:15px;
+  background:#fff;
+  border:1px solid var(--line);
+  position:relative;
+}
+.flow-step:not(:last-child):after{
+  content:"→";
+  position:absolute;
+  right:-11px;top:50%;
+  transform:translateY(-50%);
+  color:var(--teal);
+  font-weight:900;
+}
+.flow-step b{display:block;color:var(--navy);margin-bottom:5px}
+.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.source{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  background:#fff;
+}
+.source small{color:var(--ok);font-weight:900}
+.source h3{margin:6px 0;color:var(--navy)}
+.source a{
+  display:inline-block;
+  margin-top:9px;
+  text-decoration:none;
+  color:#fff;
+  background:#3a3936;
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:800;
+}
+.watch{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+.watch .left{
+  background:#f3eddf;
+  color:var(--navy);
+  font-weight:900;
+  padding:14px;
+}
+.watch .right{padding:14px;font-size:13px}
+.pill{
+  display:inline-block;
+  margin:5px 4px 0 0;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#f0eadf;
+  color:var(--navy);
+  font-size:11px;
+  font-weight:800;
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+.btn{
+  border:0;
+  cursor:pointer;
+  text-decoration:none;
+  padding:10px 13px;
+  border-radius:11px;
+  font-size:13px;
+  font-weight:800;
+}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.teal{background:var(--teal);color:#263015}
+.btn.light{background:#eef4f7;color:var(--navy);border:1px solid var(--line)}
+footer{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:3px solid var(--teal);
+  color:var(--muted);
+  font-size:11px;
+  text-align:center;
+}
+@media(max-width:1050px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto}
+  .menu{grid-template-columns:repeat(3,1fr)}
+  .main{padding:18px}
+  .source-grid,.grid4,.grid3,.grid2{grid-template-columns:1fr}
+  .span4,.span5,.span6,.span7,.span8,.span12{grid-column:span 12}
+}
+@media(max-width:700px){
+  .menu{grid-template-columns:1fr 1fr}
+  .dashboard{grid-template-columns:1fr}
+  .tile{grid-column:1!important}
+  .module-head,.module-body{padding-left:18px;padding-right:18px}
+  .topbar{display:block}
+  .contact{text-align:left;margin-top:8px}
+  .watch{grid-template-columns:1fr}
+  .flow-step:not(:last-child):after{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="sidebar">
+  <div class="brand">
+    <div class="small">Portfolio métier</div>
+    <h1>Angélique Boulle</h1>
+    <p>Paie • DSN • RH • SIRH<br>Candidature LEBHAR — Gron</p>
+  </div>
+
+  <div class="menu">
+    <button class="active" data-panel="home"><span class="ico">⌂</span>Vue d’ensemble</button>
+    <button data-panel="lebhar"><span class="ico">L</span>Comprendre LEBHAR</button>
+    <button data-panel="paie"><span class="ico">€</span>Cycle de paie</button>
+    <button data-panel="dsn"><span class="ico">D</span>DSN & déclaratif</button>
+    <button data-panel="adp"><span class="ico">RH</span>Administration RH</button>
+    <button data-panel="juridique"><span class="ico">§</span>Cadre juridique</button>
+    <button data-panel="sirh"><span class="ico">SI</span>SIRH & digitalisation</button>
+    <button data-panel="veille"><span class="ico">V</span>Veille paie / DSN</button>
+    <button data-panel="controle"><span class="ico">✓</span>Contrôles</button>
+    <button data-panel="synthese"><span class="ico">→</span>Positionnement</button>
+  </div>
+
+  <div class="sidebar-foot">
+    MBA Juriste d’entreprise — en cours<br>
+    Convention collective du cartonnage — IDCC 0489<br><br>
+    Paron (89100) • Mobilité Gron / Sens
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="breadcrumb" id="breadcrumb">Portfolio / Vue d’ensemble</div>
+    <div class="contact">06 50 97 31 05 • angeliqueboulle072@gmail.com</div>
+  </div>
+
+  <section class="panel active" id="panel-home">
+    <div class="hero">
+      <span class="kicker">Candidature Gestionnaire Paie & Missions RH</span>
+      <h2>Comprendre le poste.<br>Sécuriser la pratique.</h2>
+      <div class="sub">Un portfolio construit comme un tableau de bord métier</div>
+      <p>
+        Ce support ne cherche pas à présenter une expérience de paie complète que je n’ai pas encore acquise.
+        Il montre comment mon socle RH, ma formation, ma veille et ma méthode de contrôle me permettent d’aborder
+        les missions de manière structurée et fiable.
+      </p>
+      <div style="display:flex;gap:6px;margin-top:18px;align-items:center">
+        <span title="Vert LEBHAR" style="width:34px;height:8px;border-radius:99px;background:#8db63f"></span>
+        <span title="Taupe LEBHAR" style="width:34px;height:8px;border-radius:99px;background:#a88958"></span>
+        <span title="Beige LEBHAR" style="width:34px;height:8px;border-radius:99px;background:#d8c5a6"></span>
+        <span title="Anthracite LEBHAR" style="width:34px;height:8px;border-radius:99px;background:#343432"></span>
+      </div>
+      <div class="badges">
+        <span class="badge">Paie & éléments variables</span>
+        <span class="badge">DSN</span>
+        <span class="badge">Administration du personnel</span>
+        <span class="badge">SIRH</span>
+        <span class="badge">MBA Juriste d’entreprise</span>
+        <span class="badge">IDCC 0489</span>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <div class="tile span5" data-open="lebhar">
+        <div class="num">01 — ENTREPRISE</div>
+        <h3>Comprendre LEBHAR</h3>
+        <p>Groupe familial, multi-sites, industrie, RSE, savoir-faire et enjeux de transformation.</p>
+      </div>
+      <div class="tile span7" data-open="paie">
+        <div class="num">02 — MÉTIER</div>
+        <h3>Cycle de paie & bulletin</h3>
+        <p>Collecte, contrôle, calcul, rapprochement et exemple fictif de bulletin.</p>
+      </div>
+      <div class="tile span4" data-open="dsn">
+        <div class="num">03 — DÉCLARATIF</div>
+        <h3>DSN</h3>
+        <p>Préparation, contrôles, CRM et correction des anomalies.</p>
+      </div>
+      <div class="tile span4" data-open="juridique">
+        <div class="num">04 — DROIT</div>
+        <h3>Cadre juridique</h3>
+        <p>Convention collective, droit social, contrats et conformité.</p>
+      </div>
+      <div class="tile span4" data-open="sirh">
+        <div class="num">05 — TRANSFORMATION</div>
+        <h3>SIRH & digitalisation</h3>
+        <p>Migration, paie à blanc, qualité des données et outils de suivi.</p>
+      </div>
+      <div class="tile span6" data-open="veille">
+        <div class="num">06 — VEILLE</div>
+        <h3>Veille paie / DSN 2026</h3>
+        <p>Net-entreprises, Dsn-Val, Urssaf, BOSS, CNIL et sources officielles.</p>
+      </div>
+      <div class="tile span6" data-open="controle">
+        <div class="num">07 — FIABILITÉ</div>
+        <h3>Matrice de contrôle</h3>
+        <p>Les vérifications à effectuer avant clôture et après dépôt déclaratif.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-lebhar">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Comprendre l’entreprise</div>
+        <h2>LEBHAR : environnement, culture et enjeux</h2>
+        <p>Un groupe familial français de l’emballage, organisé en plusieurs sites de production, avec Gron comme siège.</p>
+      </div>
+      <div class="module-body">
+        <div class="grid4">
+          <div class="card soft"><div class="metric">4</div><h4>Générations</h4><p>Une culture de transmission et de continuité du savoir-faire.</p></div>
+          <div class="card soft"><div class="metric">6</div><h4>Sites de production</h4><p>Une organisation multi-sites impliquant des pratiques RH structurées.</p></div>
+          <div class="card soft"><div class="metric">≈ 280</div><h4>Collaborateurs</h4><p>Un volume qui justifie fiabilité, homogénéité et traçabilité.</p></div>
+          <div class="card soft"><div class="metric">6 000</div><h4>Clients</h4><p>Un modèle où qualité de service et réactivité sont centrales.</p></div>
+        </div>
+
+        <div class="grid3" style="margin-top:16px">
+          <div class="card"><h3>Gron</h3><p>Siège du groupe et site industriel. Le poste RH s’inscrit donc à la fois dans l’opérationnel et dans une logique de groupe.</p></div>
+          <div class="card"><h3>Transformation</h3><p>Innovation produit, personnalisation, outils numériques et projet SIRH montrent une entreprise qui modernise ses pratiques.</p></div>
+          <div class="card"><h3>RSE</h3><p>Emballages recyclables, réduction des déchets, bilan carbone, intégration et formation continue des collaborateurs.</p></div>
+        </div>
+
+        <div class="note">
+          <strong>Lecture du contexte :</strong> dans un groupe multi-sites qui modernise ses outils tout en valorisant la transmission,
+          la fonction Paie & Missions RH peut contribuer à fiabiliser les données, harmoniser les pratiques et accompagner le changement.
+        </div>
+
+        <div class="actions">
+          <a class="btn primary" href="https://lebhar.com/presentation-du-groupe-lebhar/" target="_blank" rel="noopener">Présentation du Groupe</a>
+          <a class="btn light" href="https://lebhar.com/politique-rse-groupe-lebhar/" target="_blank" rel="noopener">Politique RSE</a>
+          <button class="btn teal" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-paie">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Paie — environ 35 bulletins</div>
+        <h2>Du variable au bulletin contrôlé</h2>
+        <p>Une méthode de traitement basée sur la qualité des données d’entrée et l’analyse des écarts.</p>
+      </div>
+      <div class="module-body">
+        <div class="flow">
+          <div class="flow-step"><b>1. Collecter</b>Temps, primes, absences, entrées/sorties.</div>
+          <div class="flow-step"><b>2. Vérifier</b>Période, justificatif, validation manager.</div>
+          <div class="flow-step"><b>3. Calculer</b>Brut, cotisations, net fiscal, PAS.</div>
+          <div class="flow-step"><b>4. Contrôler</b>Comparatif N/N-1 et écarts.</div>
+          <div class="flow-step"><b>5. Valider</b>Journal, bulletins, archivage.</div>
+        </div>
+
+        <div class="grid2" style="margin-top:18px">
+          <div class="card soft">
+            <h3>Exemple fictif</h3>
+            <p>Salarié mensualisé à 2 300 € brut, 7 heures supplémentaires, prime de 120 € et demi-journée d’absence.</p>
+          </div>
+          <div class="card">
+            <h3>Réflexe</h3>
+            <p>Ne pas chercher uniquement le « bon chiffre » : pouvoir expliquer pourquoi le brut et le net sont différents du mois précédent.</p>
+          </div>
+        </div>
+
+        <table>
+          <tr><th>Rubrique</th><th>Base</th><th>Traitement</th><th>Montant fictif</th></tr>
+          <tr><td>Salaire mensuel</td><td>151,67 h</td><td>Base contractuelle</td><td class="num">2 300,00 €</td></tr>
+          <tr><td>Heures supplémentaires</td><td>7 h</td><td>Majoration applicable</td><td class="num">+ 145,00 €</td></tr>
+          <tr><td>Prime</td><td>Validation manager</td><td>Variable</td><td class="num">+ 120,00 €</td></tr>
+          <tr><td>Absence</td><td>0,5 jour</td><td>Retenue paramétrée</td><td class="num">- 55,00 €</td></tr>
+          <tr><th colspan="3">Brut illustratif</th><th class="num">2 510,00 €</th></tr>
+          <tr><td>Cotisations salariales</td><td>Assiettes diverses</td><td>Taux paramétrés</td><td class="num">- 535,00 €</td></tr>
+          <tr><td>PAS</td><td>Net fiscal</td><td>Taux transmis</td><td class="num">- 80,00 €</td></tr>
+          <tr><th colspan="3">Net à payer illustratif</th><th class="num">1 895,00 €</th></tr>
+        </table>
+
+        <div class="actions">
+          <button class="btn primary" data-open="dsn">Continuer vers la DSN</button>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-dsn">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">DSN & déclaratif</div>
+        <h2>Avant dépôt / après dépôt</h2>
+        <p>La DSN n’est pas une simple transmission : elle prolonge le contrôle de la paie.</p>
+      </div>
+      <div class="module-body">
+        <div class="grid2">
+          <div class="card soft">
+            <h3>Avant dépôt</h3>
+            <div class="steps">
+              <div class="step"><div><strong>Clôturer la paie</strong><br>Bulletins validés.</div></div>
+              <div class="step"><div><strong>Rapprocher</strong><br>Bruts, effectif, charges, événements.</div></div>
+              <div class="step"><div><strong>Générer</strong><br>Fichier conforme à la norme active.</div></div>
+              <div class="step"><div><strong>Pré-contrôler</strong><br>Contrôles logiciel / Dsn-Val.</div></div>
+            </div>
+          </div>
+          <div class="card soft">
+            <h3>Après dépôt</h3>
+            <div class="steps">
+              <div class="step"><div><strong>Lire les CRM</strong><br>Ne pas s’arrêter au statut « accepté ».</div></div>
+              <div class="step"><div><strong>Qualifier</strong><br>Identité, assiette, cotisation, événement.</div></div>
+              <div class="step"><div><strong>Corriger</strong><br>Traiter la cause et pas seulement le symptôme.</div></div>
+              <div class="step"><div><strong>Archiver</strong><br>Preuves de dépôt et corrections.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <table>
+          <tr><th>Contrôle</th><th>Question</th><th>Action</th></tr>
+          <tr><td>Effectif</td><td>35 salariés attendus ?</td><td>Rapprocher avec entrées/sorties.</td></tr>
+          <tr><td>Masse salariale</td><td>Total déclaré = journal de paie ?</td><td>Analyser l’écart.</td></tr>
+          <tr><td>Identité</td><td>CRM d’anomalie ?</td><td>Vérifier la donnée source.</td></tr>
+          <tr><td>Fin de contrat</td><td>Dates cohérentes ?</td><td>Contrôler contrat, paie, signalement.</td></tr>
+        </table>
+
+        <div class="actions">
+          <button class="btn primary" data-open="veille">Voir la veille DSN 2026</button>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-adp">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Administration du personnel</div>
+        <h2>La donnée RH avant la donnée de paie</h2>
+        <p>Le bulletin dépend de la qualité du dossier salarié, des pièces et des validations.</p>
+      </div>
+      <div class="module-body">
+        <div class="grid4">
+          <div class="card"><h4>Entrée</h4><p>Contrat, identité, RIB, affiliation, paramétrage, visite médicale.</p></div>
+          <div class="card"><h4>Vie du contrat</h4><p>Avenants, rémunération, horaires, absences, mutuelle, prévoyance.</p></div>
+          <div class="card"><h4>Temps</h4><p>Heures, compteurs, majorations, validation manager.</p></div>
+          <div class="card"><h4>Sortie</h4><p>Date, solde, documents, signalement, archivage.</p></div>
+        </div>
+        <div class="callout"><strong>Principe :</strong> toute donnée ayant un impact paie doit pouvoir être reliée à une pièce, une validation ou une règle identifiable.</div>
+        <div class="actions">
+          <button class="btn primary" data-open="juridique">Voir le cadre juridique</button>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-juridique">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Droit social & convention collective</div>
+        <h2>IDCC 0489 + MBA Juriste d’entreprise</h2>
+        <p>La sécurisation de la paie passe par l’identification de la bonne source juridique.</p>
+      </div>
+      <div class="module-body">
+        <div class="grid2">
+          <div class="card soft">
+            <h3>Convention collective du cartonnage — IDCC 0489</h3>
+            <p>Classification, minima conventionnels, temps de travail, majorations, maintien de salaire et règles de départ doivent être vérifiés selon la situation.</p>
+          </div>
+          <div class="card soft">
+            <h3>MBA Juriste d’entreprise — en cours</h3>
+            <p>Droit social, contrats, conformité, précontentieux et contentieux : un complément utile pour rechercher la règle et sécuriser un traitement RH.</p>
+          </div>
+        </div>
+
+        <table>
+          <tr><th>Point</th><th>Question de contrôle</th><th>Impact</th></tr>
+          <tr><td>Classification</td><td>Bonne catégorie / niveau ?</td><td>Minimum conventionnel.</td></tr>
+          <tr><td>Rémunération</td><td>Salaire ≥ minimum applicable ?</td><td>Régularisation éventuelle.</td></tr>
+          <tr><td>Primes / majorations</td><td>Une règle conventionnelle existe-t-elle ?</td><td>Rubrique de paie.</td></tr>
+          <tr><td>Absence / maintien</td><td>Disposition plus favorable ?</td><td>Indemnisation et subrogation.</td></tr>
+          <tr><td>Départ</td><td>Préavis / indemnité spécifiques ?</td><td>Solde de tout compte.</td></tr>
+        </table>
+
+        <div class="note"><strong>Méthode :</strong> Code du travail → convention collective → accord d’entreprise éventuel → paramétrage logiciel → contrôle du bulletin.</div>
+        <div class="actions">
+          <a class="btn primary" href="https://www.legifrance.gouv.fr/conv_coll/id/KALITEXT000048043949" target="_blank" rel="noopener">Consulter la convention</a>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-sirh">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">SIRH & transformation</div>
+        <h2>Migration, qualité de données et paie à blanc</h2>
+        <p>La transformation numérique n’est utile que si elle sécurise et simplifie le travail RH.</p>
+      </div>
+      <div class="module-body">
+        <div class="flow">
+          <div class="flow-step"><b>Recenser</b>Données salariés, contrats, cumuls, organismes.</div>
+          <div class="flow-step"><b>Nettoyer</b>Doublons, champs manquants, incohérences.</div>
+          <div class="flow-step"><b>Mapper</b>Ancien champ → nouveau champ.</div>
+          <div class="flow-step"><b>Tester</b>Paie à blanc et rapprochement.</div>
+          <div class="flow-step"><b>Documenter</b>Écarts, décisions, procédures.</div>
+        </div>
+
+        <div class="grid2" style="margin-top:18px">
+          <div class="card ok"><h3>Avant</h3><p>Variables reçues par plusieurs canaux, pièces dispersées, risques de doublons ou d’oubli.</p></div>
+          <div class="card ok"><h3>Après</h3><p>Source unique, statuts de validation, date de transmission, responsable et traçabilité.</p></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" data-open="controle">Voir les contrôles</button>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-veille">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Veille professionnelle — 2026</div>
+        <h2>Paie, DSN, cotisations et données RH</h2>
+        <p>La compétence ne consiste pas à mémoriser tous les taux, mais à savoir où vérifier la règle à jour et son impact.</p>
+      </div>
+      <div class="module-body">
+        <div class="watch"><div class="left">DSN 2026</div><div class="right"><strong>Norme NEODeS 2026.1.2.</strong> Suivi du cahier technique, du journal de maintenance et de la documentation 2027.<br><span class="pill">Net-entreprises</span><span class="pill">Cahier technique</span></div></div>
+        <div class="watch"><div class="left">Dsn-Val</div><div class="right"><strong>Pré-contrôle technique.</strong> Utiliser une version correspondant à la norme en production.<br><span class="pill">Contrôle</span><span class="pill">Anomalies</span></div></div>
+        <div class="watch"><div class="left">CRM / RUNIC</div><div class="right"><strong>Retours organismes.</strong> Suivre les contrôles et anomalies normalisés pour fiabiliser les données.<br><span class="pill">CRM</span><span class="pill">RUNIC</span></div></div>
+        <div class="watch"><div class="left">Cotisations 2026</div><div class="right"><strong>Allègements généraux.</strong> Suivre les évolutions Urssaf/BOSS et leur traduction dans le logiciel de paie.<br><span class="pill">Urssaf</span><span class="pill">BOSS</span></div></div>
+        <div class="watch"><div class="left">RGPD</div><div class="right"><strong>Données RH sensibles.</strong> Habilitations, accès limités, traçabilité et conservation maîtrisée.<br><span class="pill">CNIL</span><span class="pill">Confidentialité</span></div></div>
+
+        <div class="source-grid" style="margin-top:18px">
+          <div class="source"><small>SOURCE OFFICIELLE</small><h3>Net-entreprises</h3><a href="https://www.net-entreprises.fr/declaration/norme-et-documentation-dsn/" target="_blank" rel="noopener">Documentation DSN</a></div>
+          <div class="source"><small>SOURCE OFFICIELLE</small><h3>Urssaf</h3><a href="https://www.urssaf.fr/" target="_blank" rel="noopener">Ouvrir</a></div>
+          <div class="source"><small>SOURCE OFFICIELLE</small><h3>BOSS</h3><a href="https://boss.gouv.fr/" target="_blank" rel="noopener">Ouvrir</a></div>
+          <div class="source"><small>SOURCE OFFICIELLE</small><h3>Légifrance</h3><a href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener">Ouvrir</a></div>
+          <div class="source"><small>SOURCE OFFICIELLE</small><h3>CNIL</h3><a href="https://www.cnil.fr/fr/les-regles-pour-la-gestion-du-personnel" target="_blank" rel="noopener">Ouvrir</a></div>
+          <div class="source"><small>OUTIL</small><h3>Dsn-Val</h3><a href="https://www.net-entreprises.fr/declaration/outils-de-controle-dsn-val/" target="_blank" rel="noopener">Ouvrir</a></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" data-open="controle">Voir la matrice de contrôle</button>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-controle">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Fiabilisation</div>
+        <h2>Matrice de contrôle avant clôture</h2>
+        <p>Une logique de contrôle simple : données sources, bulletin, déclaration, preuve.</p>
+      </div>
+      <div class="module-body">
+        <div class="grid3">
+          <div class="card ok"><h4>Entrées / sorties</h4><p>Dates, contrats, établissement, documents.</p></div>
+          <div class="card ok"><h4>Variables</h4><p>Justificatifs, validations, doublons, période.</p></div>
+          <div class="card ok"><h4>Écarts N/N-1</h4><p>Brut, net, retenues, cotisations.</p></div>
+          <div class="card ok"><h4>Cumuls</h4><p>Assiettes, plafonds, net fiscal, PAS.</p></div>
+          <div class="card ok"><h4>Journal de paie</h4><p>Masse salariale, charges, cohérence globale.</p></div>
+          <div class="card ok"><h4>DSN / CRM</h4><p>Pré-contrôle, anomalies, corrections, preuves.</p></div>
+        </div>
+        <div class="callout"><strong>Objectif :</strong> pouvoir justifier chaque donnée sensible et chaque écart avant validation finale.</div>
+        <div class="actions">
+          <button class="btn primary" data-open="synthese">Voir le positionnement final</button>
+          <button class="btn light" data-open="home">Retour au tableau de bord</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-synthese">
+    <div class="module">
+      <div class="module-head">
+        <div class="eyebrow">Synthèse</div>
+        <h2>Ce que je peux apporter au poste</h2>
+        <p>Un profil RH qui connaît son point de progression et a structuré la manière de le combler.</p>
+      </div>
+      <div class="module-body">
+        <div class="grid4">
+          <div class="card ok"><h3>Compréhension métier</h3><p>Chaîne de paie, données d’entrée, contrôle et lien avec la DSN.</p></div>
+          <div class="card ok"><h3>Réflexe de fiabilisation</h3><p>Traçabilité, rapprochement et analyse des écarts.</p></div>
+          <div class="card ok"><h3>Lecture juridique</h3><p>MBA Juriste d’entreprise et convention collective.</p></div>
+          <div class="card ok"><h3>Transformation RH</h3><p>SIRH, digitalisation, reporting et accompagnement du changement.</p></div>
+        </div>
+        <div class="callout">
+          <strong>Positionnement :</strong> je ne présente pas une autonomie complète en paie de A à Z.
+          Je présente un socle théorique structuré, des acquis pratiques sur les éléments variables, une culture RH et juridique,
+          une méthode de contrôle et une capacité de montée en compétences.
+        </div>
+        <div class="actions">
+          <button class="btn primary" data-open="home">Retour au tableau de bord</button>
+          <button class="btn teal" data-open="paie">Revoir le cycle de paie</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Angélique Boulle — Portfolio métier interactif • Candidature Gestionnaire Paie & Missions RH — LEBHAR
+  </footer>
+</main>
+</div>
+
+<script>
+const names={
+  home:"Vue d’ensemble",
+  lebhar:"Comprendre LEBHAR",
+  paie:"Cycle de paie",
+  dsn:"DSN & déclaratif",
+  adp:"Administration RH",
+  juridique:"Cadre juridique",
+  sirh:"SIRH & digitalisation",
+  veille:"Veille paie / DSN",
+  controle:"Contrôles",
+  synthese:"Positionnement"
+};
+
+function openPanel(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById('panel-'+name);
+  if(panel) panel.classList.add('active');
+
+  document.querySelectorAll('.menu button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.panel===name);
+  });
+
+  document.getElementById('breadcrumb').textContent='Portfolio / '+(names[name]||name);
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.replaceState(null,'','#'+name);
+}
+
+document.querySelectorAll('[data-panel]').forEach(btn=>{
+  btn.addEventListener('click',()=>openPanel(btn.dataset.panel));
+});
+document.querySelectorAll('[data-open]').forEach(el=>{
+  el.addEventListener('click',()=>openPanel(el.dataset.open));
+});
+
+const initial=location.hash.replace('#','');
+if(initial && names[initial]) openPanel(initial);
+</script>
+</body>
+</html>
